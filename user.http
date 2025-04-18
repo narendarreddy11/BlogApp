@@ -3,7 +3,7 @@ get http://localhost:4000/user-api/user
 
 
 ### user-regiter
-post https://blogapp-oxum.onrender.com/user-api/user
+ post https://blogapp-oxum.onrender.com/user-api/user
 Content-Type: application/json
 
 {
