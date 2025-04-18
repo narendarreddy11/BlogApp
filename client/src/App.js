@@ -50,6 +50,10 @@ function App() {
         element:<Adminarticles/>
       },
       {
+          path:'',
+          element:<Navigate to="adminuserlist" />
+      },
+      {
         path:'adminuserlist',
         element:<AdminUsersList/>
       },

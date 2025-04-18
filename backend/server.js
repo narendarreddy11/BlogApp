@@ -29,12 +29,12 @@ MongoClient.connect(process.env.DB_URL)
     app.set('adminscollections', adminscollections);
 
     // Insert default admin if not exists
-    const existingAdmin = await adminscollections.findOne({ username: 'admin' });
+    const existingAdmin = await adminscollections.findOne({ username: process.env.ADMIN_USERNAME });
     if (!existingAdmin) {
-      const hashedPassword = await bcryptjs.hash('admin123', 8);
+      const hashedPassword = await bcryptjs.hash(process.env.ADMIN_PASSWORD, 8);
       await adminscollections.insertOne({
         userType: "admin",
-        username: 'admin',
+        username: process.env.ADMIN_USERNAME,
         password: hashedPassword,
         status: true
       });
