@@ -1,0 +1,24 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure card takes full height of the parent */
+  }
+  
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 200px; /* Adjust this value based on your design */
+  }
+  
+  .card-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    /* -webkit-line-clamp: 3; Limit to 3 lines of text */
+    -webkit-box-orient: vertical;
+    margin-bottom: 1rem; /* Ensure spacing for the button */
+  }
+  
+  .custom-btn {
+    align-self: flex-start; /* Align button to the start */
+  }
