@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API } from './config';
 
 const SignUp = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -37,9 +38,9 @@ const SignUp = () => {
     let res;
     try {
       if (userobj.userType === 'user') {
-        res = await axios.post('http://localhost:4000/user-api/user', userobj);
+        res = await axios.post(`${API}/user-api/user`, userobj);
       } else if (userobj.userType === 'author') {
-        res = await axios.post('http://localhost:4000/author-api/user', userobj);
+        res = await axios.post(`${API}/author-api/user`, userobj);
       }
 
       if (res.data.message === 'user created') {

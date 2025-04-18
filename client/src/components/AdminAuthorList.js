@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AxioWithtoken } from '../AxioWithToken';
+import { API } from './config';
 
 function AdminAuthorList() {
   const [authorList, setAuthorList] = useState([]);
@@ -7,7 +8,7 @@ function AdminAuthorList() {
   // Fetch authors from the backend
   async function getAuthorsAdmin() {
     try {
-      const res = await AxioWithtoken.get('http://localhost:4000/admin-api/authorsList');
+      const res = await AxioWithtoken.get(`${API}/admin-api/authorsList`);
       if (res.data.payload) {
         setAuthorList(res.data.payload);
       }
@@ -28,7 +29,7 @@ function AdminAuthorList() {
     };
 
     try {
-      const res = await AxioWithtoken.put('http://localhost:4000/admin-api/userauthorblock', info);
+      const res = await AxioWithtoken.put(`${API}/admin-api/userauthorblock`, info);
       console.log("Backend response:", res.data.message, "Status:", res.data.status);
 
       // Update author status locally

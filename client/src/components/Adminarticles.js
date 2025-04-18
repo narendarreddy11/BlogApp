@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AxioWithtoken } from '../AxioWithToken';
 import { useNavigate } from 'react-router-dom';
 import { MdDelete } from 'react-icons/md';
-
+import { API } from './config';
 function Adminarticles() {
   const [articlelist, setArticleList] = useState([]);
   const [deletingIds, setDeletingIds] = useState([]); // Track which articles are being deleted
@@ -10,7 +10,7 @@ function Adminarticles() {
 
   async function getarticles() {
     try {
-      const res = await AxioWithtoken.get('http://localhost:4000/admin-api/AllArticles');
+      const res = await AxioWithtoken.get(`${API}/admin-api/AllArticles`);
       if (res.data.payload) {
         setArticleList(res.data.payload);
       }
@@ -41,7 +41,7 @@ function Adminarticles() {
     // Wait for animation before actually deleting
     setTimeout(async () => {
       try {
-        const res = await AxioWithtoken.put('http://localhost:4000/admin-api/deletearticle', articleIdinfo);
+        const res = await AxioWithtoken.put(`${API}/admin-api/deletearticle`, articleIdinfo);
         if (res.data.message === 'deleted article') {
           setArticleList(prev => prev.filter(article => article.articleId !== articleobj.articleId));
         }

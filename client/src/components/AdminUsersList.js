@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AxioWithtoken } from '../AxioWithToken';
+import { API } from './config';
 
 function AdminUsersList() {
   const [userlist, setuserlist] = useState([]);
@@ -7,7 +8,7 @@ function AdminUsersList() {
   // Fetch users from the backend
   async function getusersadmin() {
     try {
-      const res = await AxioWithtoken.get('http://localhost:4000/admin-api/usersList');
+      const res = await AxioWithtoken.get(`${API}/admin-api/usersList`);
       if (res.data.payload) {
         setuserlist(res.data.payload);
       }
@@ -28,7 +29,7 @@ function AdminUsersList() {
     };
 
     try {
-      const res = await AxioWithtoken.put('http://localhost:4000/admin-api/userauthorblock', info);
+      const res = await AxioWithtoken.put(`${API}/admin-api/userauthorblock`, info);
 
       // Update the user status locally in the state
       setuserlist((prevList) =>

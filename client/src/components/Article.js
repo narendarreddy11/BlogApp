@@ -7,6 +7,7 @@ import { MdPerson } from "react-icons/md";
 import { FaRegClock, FaComments, FaCheckCircle, FaCommentAlt } from "react-icons/fa";
 import { MdEdit, MdDelete, MdRestore } from "react-icons/md"; 
 import './Article.css';
+import { API } from './config';
 
 function Article() {
   const { currentUser } = useSelector(state => state.userAuthorLoginReducer);
@@ -31,7 +32,7 @@ function Article() {
     delete art._id;
 
     let res = await AxioWithtoken.put(
-      `http://localhost:4000/author-api/article/${currentArticle.articleId}`,
+      `${API}/author-api/article/${currentArticle.articleId}`,
       art
     );
 
@@ -46,7 +47,7 @@ function Article() {
 
   const writeComment = async (commonObj) => {
     commonObj.username = currentUser.username;
-    let res = await AxioWithtoken.post(`http://localhost:4000/user-api/comment/${article.articleId}`, commonObj);
+    let res = await AxioWithtoken.post(`${API}/user-api/comment/${article.articleId}`, commonObj);
     if (res.data.message === "Comment Posted") {
       setComment(res.data.message);
       setComments(prev => [...prev, commonObj]);
@@ -62,7 +63,7 @@ function Article() {
     let modifiedArticle = { ...state, ...editedArticle };
     modifiedArticle.dateOfModification = new Date();
     delete modifiedArticle._id;
-    let res = await AxioWithtoken.put(`http://localhost:4000/author-api/article`, modifiedArticle);
+    let res = await AxioWithtoken.put(`${API}/author-api/article`, modifiedArticle);
     if (res.data.message === "Article updated") {
       setShowEditForm(false);  // Hide form after saving
       navigate(`/author-profile/article/${modifiedArticle.articleId}`, { state: res.data.larticle });

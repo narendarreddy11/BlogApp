@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { AxioWithtoken } from '../AxioWithToken';
+import { API } from './config';
 
 function ArticlesByAuthor() {
   const { currentUser } = useSelector((state) => state.userAuthorLoginReducer);
@@ -20,7 +21,7 @@ function ArticlesByAuthor() {
       }
 
       const res = await AxioWithtoken.get(
-        `http://localhost:4000/author-api/articles/${currentUser.username}`
+        `${API}/author-api/articles/${currentUser.username}`
       );
       setArticleList(res.data.payload);
     } catch (err) {

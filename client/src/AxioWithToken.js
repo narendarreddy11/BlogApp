@@ -1,7 +1,7 @@
 import axios from 'axios';
-
+import { API } from './components/config';
 export const AxioWithtoken = axios.create({
-  baseURL: 'http://localhost:4000', // optional, you can remove if not needed
+  baseURL: `${API}`, // optional, you can remove if not needed
 });
 
 // 🔁 Attach latest token before every request

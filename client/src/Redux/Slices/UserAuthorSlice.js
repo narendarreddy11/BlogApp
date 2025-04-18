@@ -1,18 +1,19 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { API } from '../../components/config';
 
 // Login thunk
 export const userAuthorLoginThunk = createAsyncThunk('user-author-login', async (usercredobj, thunkApi) => {
   try {
     let res;
     if (usercredobj.userType === 'user') {
-      res = await axios.post('http://localhost:4000/user-api/login', usercredobj);
+      res = await axios.post(`${API}/user-api/login`, usercredobj);
     } else if (usercredobj.userType === 'author') {
-      res = await axios.post('http://localhost:4000/author-api/login', usercredobj);
+      res = await axios.post(`${API}/author-api/login`, usercredobj);
     }
     else if (usercredobj.userType === 'admin')
     {
-      res = await axios.post('http://localhost:4000/admin-api/Adminlogin', usercredobj);
+      res = await axios.post(`${API}/admin-api/Adminlogin`, usercredobj);
 
     }
 
@@ -30,7 +31,7 @@ export const userAuthorLoginThunk = createAsyncThunk('user-author-login', async 
 // Verify token thunk
 export const verifyToken = createAsyncThunk('verify-token', async (token, thunkApi) => {
   try {
-    const response = await axios.post('http://localhost:4000/verify-token', { token });
+    const response = await axios.post(`${API}/verify-token`, { token });
     if (response.data.success) {
       return response.data.user;
     } else {

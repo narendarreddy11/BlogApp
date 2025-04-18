@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { AxioWithtoken } from '../AxioWithToken';
 import { useNavigate, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { API } from './config';
 
 function Articles() {
   const [articleList, setArticleList] = useState([]);
@@ -9,7 +10,7 @@ function Articles() {
   const { currentUser } = useSelector((state) => state.userAuthorLoginReducer);
 
   const getarticlesOfcurrentAuthor = async () => {
-    let res = await AxioWithtoken.get(`http://localhost:4000/user-api/articles`);
+    let res = await AxioWithtoken.get(`${API}/user-api/articles`);
     setArticleList(res.data.payload);
   };
 

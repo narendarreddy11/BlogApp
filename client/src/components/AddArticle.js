@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
+import { API } from './config';
 const AddArticle = () => {
   const { currentUser } = useSelector(state => state.userAuthorLoginReducer);
   const {
@@ -39,7 +39,7 @@ const AddArticle = () => {
       article.categoryType = "Chosen";
     }
 
-    let res = await axioWithtoken.post('http://localhost:4000/author-api/article', article);
+    let res = await axioWithtoken.post(`${API}/author-api/article`, article);
     
 
     if (res.data.message === "new article created") {
