@@ -4,6 +4,10 @@ require('dotenv').config();
 const path = require('path');
 const MongoClient = require('mongodb').MongoClient;
 const bcryptjs = require('bcryptjs');
+const cors = require('cors');  // Import CORS package
+
+// Enable CORS for all routes
+app.use(cors());  // This will allow all origins to access the server
 
 // Serve React build (frontend)
 app.use(exp.static(path.join(__dirname, '../client/build')));
